@@ -45,3 +45,22 @@ li {
 img {
     width: 100px;
 }
+select {
+    display: block;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+.dark {
+    background-color: #333;
+    color: white;
+}
+
+.dark main {
+    border-color: white;
+}
+
+.dark h2 {
+    color: #4f9acf;
+    border-bottom-color: white;
+}
