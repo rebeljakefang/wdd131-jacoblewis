@@ -55,6 +55,9 @@ nav a:hover {
 footer {
     text-align: center;
 }
+.hide a {
+    display: inline-block;
+}
 
 @media screen and (min-width: 840px) {
     nav a {
