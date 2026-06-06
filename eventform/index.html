@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Ticket Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <main>
+    <h1>Event Ticket Form</h1>
+    <p class="intro">Fill out the form below to reserve your event ticket.</p>
+
+    <form id="ticketForm" novalidate>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName">
+
+      <label for="eventDate">Event Date</label>
+      <input type="date" id="eventDate" name="eventDate">
+
+      <label for="type">Type</label>
+      <select id="type" name="type">
+        <option value="">Choose One</option>
+        <option value="student">Student</option>
+        <option value="guest">Guest</option>
+      </select>
+
+      <div id="extraField" class="hidden">
+        <label id="extraLabel" for="extraInput">Student I#</label>
+        <input type="text" id="extraInput" name="extraInput">
+      </div>
+
+      <button type="submit">Get Ticket</button>
+    </form>
+
+    <section id="errors" aria-live="polite"></section>
+    <section id="ticketInfo" aria-live="polite"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
