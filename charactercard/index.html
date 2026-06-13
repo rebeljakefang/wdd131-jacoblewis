@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Character Card</title>
+
+    <meta
+        name="description"
+        content="An interactive fantasy character card created with JavaScript objects and methods."
+    >
+
+    <!-- Open Graph social media tags -->
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:title"
+        content="Fantasy Character Card"
+    >
+
+    <meta
+        property="og:description"
+        content="View an interactive fantasy character and update its health and level."
+    >
+
+    <meta
+        property="og:url"
+        content="https://rebeljakefang.github.io/wdd131/charactercard/"
+    >
+
+    <meta
+        property="og:image"
+        content="https://rebeljakefang.github.io/wdd131/charactercard/snortleblat.webp"
+    >
+
+    <!-- Twitter social media tags -->
+    <meta
+        name="twitter:card"
+        content="summary_large_image"
+    >
+
+    <meta
+        name="twitter:title"
+        content="Fantasy Character Card"
+    >
+
+    <meta
+        name="twitter:description"
+        content="View an interactive fantasy character and update its health and level."
+    >
+
+    <meta
+        name="twitter:image"
+        content="https://rebeljakefang.github.io/wdd131/charactercard/snortleblat.webp"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="character.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <section class="card" aria-labelledby="character-name">
+            <img
+                id="character-image"
+                class="character-image"
+                src="snortleblat.webp"
+                alt="Snortleblat, a fantasy swamp creature"
+                width="400"
+                height="400"
+            >
+
+            <h1 id="character-name" class="name"></h1>
+
+            <div class="stats">
+                <p>
+                    <strong>Class:</strong>
+                    <span id="character-class"></span>
+                </p>
+
+                <p>
+                    <strong>Level:</strong>
+                    <span id="character-level"></span>
+                </p>
+
+                <p>
+                    <strong>Health:</strong>
+                    <span id="character-health"></span>
+                </p>
+
+                <div
+                    class="health-bar"
+                    role="progressbar"
+                    aria-label="Character health"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="100"
+                >
+                    <div id="health-fill" class="health-fill"></div>
+                </div>
+
+                <p
+                    id="message"
+                    class="message"
+                    aria-live="polite"
+                ></p>
+            </div>
+
+
+            <div class="buttons">
+                <button id="attack-button" type="button">
+                    Attacked
+                </button>
+
+                <button id="level-button" type="button">
+                    Level Up
+                </button>
+
+                <button id="revive-button" type="button">
+                    Revive
+                </button>
+            </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            &copy; <span id="current-year"></span> Jacob Lewis
+        </p>
+    </footer>
+</body>
+</html>
