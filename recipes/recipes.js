@@ -1,0 +1,1 @@
+no JS this week Rip
