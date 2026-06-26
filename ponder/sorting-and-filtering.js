@@ -11,20 +11,22 @@ const hikes = [
     description:
       "Beautiful short hike in Yellowstone along the Bechler river to Bechler Falls",
     directions:
-      "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road.Drive to the end of the Cave Falls road. There is a parking area at the trailhead.",
+      "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to the end of the Cave Falls road. There is a parking area at the trailhead.",
     trailhead: [44.14457, -110.99781]
   },
   {
     name: "Teton Canyon",
     stub: "teton_canyon",
-    imgSrc: "https://wdd131.netlify.app/examples/hikes/images/teton-canyon.jpg",
+    imgSrc:
+      "https://wdd131.netlify.app/examples/hikes/images/teton-canyon.jpg",
     imgAlt: "Image of Teton Canyon",
     distance: "3 miles",
     tags: ["Canyon", "Tetons"],
     difficulty: 1,
-    description: "Beautiful short (or long) hike through Teton Canyon.",
+    description:
+      "Beautiful short (or long) hike through Teton Canyon.",
     directions:
-      "Take Highway 33 East to Driggs. Turn left onto Teton Canyon Road. Follow that road for a few miles then turn right onto Staline Raod for a short distance, then left onto Alta Road. Veer right after Alta back onto Teton Canyon Road. There is a parking area at the trailhead.",
+      "Take Highway 33 East to Driggs. Turn left onto Teton Canyon Road. Follow that road for a few miles then turn right onto Staline Road for a short distance, then left onto Alta Road. Veer right after Alta back onto Teton Canyon Road. There is a parking area at the trailhead.",
     trailhead: [43.75567, -110.91521]
   },
   {
@@ -36,57 +38,159 @@ const hikes = [
     distance: "7 miles",
     tags: ["Caves", "Yellowstone", "Waterfall"],
     difficulty: 3,
-    description: "Beautiful hike through Bechler meadows to Denanda Falls",
+    description:
+      "Beautiful hike through Bechler meadows to Denanda Falls",
     directions:
-      "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead.",
+      "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead.",
     trailhead: [44.14974, -111.04564]
   },
   {
     name: "Coffee Pot Rapids",
     stub: "coffee_pot",
-    imgSrc: "https://wdd131.netlify.app/examples/hikes/images/coffee-pot.jpg",
-    imgAlt: "Image of Bechler Falls",
+    imgSrc:
+      "https://wdd131.netlify.app/examples/hikes/images/coffee-pot.jpg",
+    imgAlt: "Image of Coffee Pot Rapids",
     distance: "2.2 miles",
     tags: ["Rafting"],
     difficulty: 1,
     description:
       "Beautiful hike along the Henry's Fork of the Snake River to a set of rapids.",
     directions:
-      "Take Highway 20 north to Island Park. Continue almost to Mack's in. From Highway 20, turn west on Flatrock Road for 1 mile then turn off on Coffee Pot Road and travel one-half mile to the campground entrance road. There is a parking lot right outside the campground.",
+      "Take Highway 20 north to Island Park. Continue almost to Mack's Inn. From Highway 20, turn west on Flatrock Road for 1 mile then turn off on Coffee Pot Road and travel one-half mile to the campground entrance road. There is a parking lot right outside the campground.",
     trailhead: [44.49035, -111.36619]
   },
   {
     name: "Menan Butte",
     stub: "menan_butte",
-    imgSrc: "https://wdd131.netlify.app/examples/hikes/images/menan-butte.jpg",
+    imgSrc:
+      "https://wdd131.netlify.app/examples/hikes/images/menan-butte.jpg",
     imgAlt: "Image of Menan Butte",
     distance: "3.4 miles",
     tags: ["Volcanic", "View"],
     difficulty: 2,
     description:
-      "A steep climb to one of the largest volcanic tuff cones in the world. 3.4 miles is the full loop around the crater, can be shortened.",
+      "A steep climb to one of the largest volcanic tuff cones in the world. 3.4 miles is the full loop around the crater, but it can be shortened.",
     directions:
-      "Take Highway 33 West out of Rexburg for about 8 miles. Turn left onto E Butte Road, the right onto Twin Butte road after about a mile. Follow that road for about 3 miles. You will see the parking lot/trailhead on the left.",
+      "Take Highway 33 West out of Rexburg for about 8 miles. Turn left onto E Butte Road, then right onto Twin Butte Road after about a mile. Follow that road for about 3 miles. You will see the parking lot and trailhead on the left.",
     trailhead: [43.78555, -111.98996]
   }
 ];
-const searchButton = document .getElementById("searchButton");
-searchButton.addEventListener("click", e => {
-  console.log("you clicked the button");
-  const userInput = document.getElementById("search").value;
-  console.log(userInput)
-  const filteredHikes = hikes.filter(hike => {
-    return hike.name.toLowerCase().includes(userInput) || hike.description.toLowerCase.includes(userInput);
-  })
-  console.log(filteredHikes)
-  filteredHikes.sort(sortHikesByDificulty);
-  console.log()
-});
-function sortHikesByDificulty(a, b) {
-  if(a.difficulty <b.difficulty) {
-    return -1;
-  } else if (a.difficulty > b.difficulty) {
-    return 1;
-  }
-  return 0;
+
+const hikeContainer = document.querySelector("#hike-container");
+const input = document.querySelector("#search");
+const searchButton = document.querySelector("#search-button");
+
+function search() {
+  const hikeQuery = input.value.trim().toLowerCase();
+
+  const filteredHikes = hikes.filter(function (hike) {
+    const nameMatches = hike.name.toLowerCase().includes(hikeQuery);
+
+    const descriptionMatches = hike.description
+      .toLowerCase()
+      .includes(hikeQuery);
+
+    const tagMatches = hike.tags.some(function (tag) {
+      return tag.toLowerCase().includes(hikeQuery);
+    });
+
+    return nameMatches || descriptionMatches || tagMatches;
+  });
+
+  const sortedHikes = filteredHikes.sort(compareHikes);
+
+  renderHikes(sortedHikes);
 }
+
+function compareHikes(a, b) {
+  const distanceA = parseFloat(a.distance);
+  const distanceB = parseFloat(b.distance);
+
+  return distanceA - distanceB;
+}
+
+function tagTemplate(tags) {
+  return tags
+    .map(function (tag) {
+      return `<button type="button" class="tag-button">${tag}</button>`;
+    })
+    .join(" ");
+}
+
+function difficultyTemplate(difficulty) {
+  let html = `
+    <span
+      class="rating"
+      role="img"
+      aria-label="Difficulty: ${difficulty} out of 5"
+    >
+      Difficulty:
+  `;
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= difficulty) {
+      html += `<span aria-hidden="true">🥾</span>`;
+    } else {
+      html += `<span aria-hidden="true">▫️</span>`;
+    }
+  }
+
+  html += `</span>`;
+
+  return html;
+}
+
+function hikeTemplate(hike) {
+  return `
+    <div class="hike-card">
+      <div class="hike-content">
+        <h2>${hike.name}</h2>
+
+        <div class="hike-tags">
+          ${tagTemplate(hike.tags)}
+        </div>
+
+        <p>${hike.description}</p>
+        <p><strong>Distance:</strong> ${hike.distance}</p>
+        <p>${difficultyTemplate(hike.difficulty)}</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderHikes(hikeList) {
+  hikeContainer.innerHTML = "";
+
+  if (hikeList.length === 0) {
+    hikeContainer.innerHTML = "<p>No hikes matched your search.</p>";
+    return;
+  }
+
+  hikeList.forEach(function (hike) {
+    hikeContainer.innerHTML += hikeTemplate(hike);
+  });
+}
+
+function handleEnter(event) {
+  if (event.key === "Enter") {
+    search();
+  }
+}
+
+function handleTagClick(event) {
+  if (event.target.classList.contains("tag-button")) {
+    input.value = event.target.textContent;
+    search();
+  }
+}
+
+function init() {
+  const randomNumber = Math.floor(Math.random() * hikes.length);
+  renderHikes([hikes[randomNumber]]);
+}
+
+searchButton.addEventListener("click", search);
+input.addEventListener("keydown", handleEnter);
+hikeContainer.addEventListener("click", handleTagClick);
+
+init();
