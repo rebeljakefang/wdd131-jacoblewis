@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
-  <title id="title">YouTube</title>
-  <rect x="5" y="5" width="54" height="54" rx="10" fill="none" stroke="currentColor" stroke-width="4"/>
-  <rect x="15" y="19" width="34" height="26" rx="8" fill="currentColor"/>
-  <polygon points="28,25 28,39 40,32" fill="white"/>
+  <title id="title">Search</title>
+  <circle cx="27" cy="27" r="18" fill="none" stroke="currentColor" stroke-width="6"/>
+  <line x1="40" y1="40" x2="56" y2="56" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
 </svg>
